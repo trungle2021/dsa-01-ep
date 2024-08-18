@@ -2,8 +2,8 @@ package day021;
 
 public class LicenseKeyFormatting {
     public static void main(String[] args) {
-        String s = "5F3Z-2e-9-w";
-        int k = 4;
+        String s = "5F3Z-2e-9-w-r45-323f-3e-3e";
+        int k = 3;
         System.out.println(licenseKeyFormatting(s,k));
     }
 
@@ -12,16 +12,22 @@ public class LicenseKeyFormatting {
         StringBuilder temp = new StringBuilder();
         //split output to array by '-'
         String[] splitDashes = s.split("-");
-        output.append(splitDashes[0]);
+        String firstGroup = splitDashes[0];
+        output.append(firstGroup);
 
         for (int i = 1; i < splitDashes.length; i++) {
-            output.append("-");
-            if(temp.length() < k ){
-                temp.append(splitDashes[i]);
+        }
 
+
+        int j = 1;
+        for (int i = 0; i < splitDashes.length; i++) {
+            while(j < k){
+                temp =
+                j++;
+                splitDashes.;
             }
-            output.append("-");
-            output.append(temp);
+            output.append("-").append(temp);
+
         }
         return output.toString();
     }
