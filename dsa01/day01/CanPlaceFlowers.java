@@ -51,6 +51,7 @@ public class CanPlaceFlowers {
         if(length == 1 && flowerbed[0] == 0) return true;
         if(length == 2 && (flowerbed[0] == 1 || flowerbed[1] == 1)) return false;
         if(length == 2 && n <= 1 && (flowerbed[0] == 0 && flowerbed[1] == 0)) return true;
+
         if(flowerbed[0] == 0 && flowerbed[1] == 0){
             flowerbed[0] = 1;
             n--;
