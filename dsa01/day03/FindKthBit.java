@@ -1,8 +1,5 @@
 package day03;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * 1545. Find Kth Bit in Nth Binary String
  * Medium
@@ -50,39 +47,54 @@ import java.util.List;
 
 public class FindKthBit {
     public static void main(String[] args) {
-        int n = 4, k = 11;
+        int n = 4, k = 3;
         System.out.println(findKthBit(n, k));
     }
 
-    public static String reverse(String strs) {
-        return new StringBuilder(strs).reverse().toString();
+//    public static String reverse(String strs) {
+//        return new StringBuilder(strs).reverse().toString();
+//    }
+//
+//    public static String invert(String strs) {
+//        StringBuilder sb = new StringBuilder();
+//        for (char c : strs.toCharArray()) {
+//            if (c == '0') {
+//                sb.append('1');
+//            } else {
+//                sb.append('0');
+//            }
+//        }
+//        return sb.toString();
+//    }
+//
+//        public static String formString (String strs){
+//            StringBuilder sb = new StringBuilder(strs);
+//            return sb.append(1).append(reverse(invert(strs))).toString();
+//        }
+//
+//        public static char findKthBit ( int n, int k){
+//            String[] arr = new String[n];
+//            arr[0] = "0";
+//
+//            for (int i = 1; i < n; i++) {
+//                arr[i] = formString(arr[i-1]);
+//            }
+//
+//            return arr[n-1].charAt(k-1);
+//        }
+
+    public static char findKthBit(int n, int k) {
+        /**
+         Input: n = 4, k = 11
+         Output: "1"
+         Explanation: S4 is "011100110110001".
+         The 11th bit is "1".
+         */
+        if (n == 1) return '0';
+        int length = (1 << n) - 1, mid = length / 2 + 1;
+        if (k == mid) return '1';
+        if (k < mid) return findKthBit(n - 1, k);
+        char temp = findKthBit(n - 1, length - k + 1);
+        return temp == '0' ? '1' : '0';
     }
-
-    public static String invert(String strs) {
-        StringBuilder sb = new StringBuilder();
-        for (char c : strs.toCharArray()) {
-            if (c == '0') {
-                sb.append('1');
-            } else {
-                sb.append('0');
-            }
-        }
-        return sb.toString();
-    }
-
-        public static String formString (String strs){
-            StringBuilder sb = new StringBuilder(strs);
-            return sb.append(1).append(reverse(invert(strs))).toString();
-        }
-
-        public static char findKthBit ( int n, int k){
-            String[] arr = new String[n];
-            arr[0] = "0";
-
-            for (int i = 1; i < n; i++) {
-                arr[i] = formString(arr[i-1]);
-            }
-
-            return arr[n-1].charAt(k-1);
-        }
-    }
+}
