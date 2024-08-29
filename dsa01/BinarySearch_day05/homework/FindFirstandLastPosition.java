@@ -39,57 +39,51 @@ import java.util.Arrays;
 
 public class FindFirstandLastPosition {
     public static void main(String[] args) {
-        int[] nums = {5, 7, 7, 8, 8, 10};
+        int[] nums = {5, 5, 7, 8, 8, 10};
+//        int[] nums = {1, 2, 3, 4, 5, 6, 6, 7, 9};
 //        int[] nums = {4,5,5,7,8,9,10,12,13,14};
-        int target = 5;
+//        int[] nums = {4,5,5,7,8,9,10,12,13,14};
+//        int[] nums = {4,5,5,7,8,9,10,12,13,14};
+//        int[] nums = {4};
+//        int[] nums = {2,2};
+        int target =8;
         System.out.println(Arrays.toString(searchRange(nums, target)));
     }
 
     public static int[] searchRange(int[] nums, int target) {
-        int n = nums.length;
-        int start = -1, end = -1;
-        int left = 0, right = n - 1;
-        int mid = left + (right - left) / 2;
-       
-        if (nums[left] == target) {
-            start = 0;
-        }
+        return new int[]{findStartPosition(nums, target), findEndPosition(nums, target)};
+    }
 
-        while (left <= mid) {
-            int m = left + (mid - left) / 2;
-
-            if (nums[m] < target && (nums[m + 1] == target)) {
-                start = m + 1;
-                break;
-            } else if (nums[m] == target) {
-                mid = m - 1;
-            } else {
-                left = m + 1;
+    public static int findStartPosition(int[] nums, int target){
+        int left = 0, right = nums.length - 1;
+        int startPosition = -1;
+        while (left <= right){
+            int mid = left + (right - left)/2;
+            if (nums[mid] == target){
+                startPosition = mid;
+                right = mid - 1;
+            }else if (nums[mid] > target){
+                right = mid - 1;
+            }else{
+                left = mid + 1;
             }
         }
-
-
-        left = start;
-
-        while (left <= right) {
-            int m = left + (right - left) / 2;
-            if (nums[m] > target && (nums[m - 1] == target)) {
-                end = m - 1;
-                break;
-            } else if (nums[m] == target) {
-                left = m + 1;
-            } else {
-                right = m - 1;
+        return startPosition;
+    }
+    public static int findEndPosition(int[] nums, int target){
+        int left = 0, right = nums.length - 1;
+        int endPosition = -1;
+        while (left <= right){
+            int mid = left + (right - left)/2;
+            if (nums[mid] == target){
+                endPosition = mid;
+                left = mid + 1;
+            }else if (nums[mid] > target){
+                right = mid - 1;
+            }else{
+                left = mid + 1;
             }
         }
-
-
-        return new int[]{start, end};
+        return endPosition;
     }
 }
-// 0 1 2 3 4 5 6  7 8 9 10 11 12
-// 4 5 7 8 8 8 8 8 9 10 12 13 14
-
-
-// 0 1 2 3 4 5  6  7  8  9 10 11 12
-// 4 5 7 8 8 9 10 11 12 13 14 15 16
