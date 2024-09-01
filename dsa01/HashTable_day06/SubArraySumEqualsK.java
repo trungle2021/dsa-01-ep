@@ -33,22 +33,27 @@ import java.util.HashMap;
 
 public class SubArraySumEqualsK {
     public static void main(String[] args) {
-        int[] nums = {1,2,3}; int k = 3;
+        int[] nums = {1,2,1,2,1}; int k = 3;
         subarraySum(nums, k);
 //        System.out.println(subarraySum(nums, k));
     }
 
     public static void subarraySum(int[] nums, int k) {
-        HashMap<Integer, Integer> p = new HashMap<>();
-        p.put(0, nums[0]);
+        HashMap<Integer, Integer> prefixSum = new HashMap<>();
+        HashMap<Integer, Integer> frequency = new HashMap<>();
+        prefixSum.put(nums[0], 0 );
         for (int i = 0; i < nums.length; i++) {
-            for (int j = i; j <= i; j++) {
-//                int prefixSum = p.getOrDefault(i-1, 0) + nums[i];
-//                p.put(i, prefixSum);
-                System.out.println(i + " " + i + j);
+            System.out.println("i: " + i);
+            for (int j = 0; j < nums.length; j++) {
+                int ps = prefixSum.getOrDefault(i-1, 0) + nums[i];
+                prefixSum.put(ps, i);
+//                System.out.print("j:" + j+ " ");
             }
+            System.out.println(prefixSum);
+            System.out.println();
+
         }
 
-//        return 0;
+//        return p.get(k);
     }
 }
