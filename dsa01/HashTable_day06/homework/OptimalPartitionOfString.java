@@ -42,6 +42,6 @@ public class OptimalPartitionOfString {
     }
 
     public static int partitionString(String s) {
-
+        return 0;
     }
 }

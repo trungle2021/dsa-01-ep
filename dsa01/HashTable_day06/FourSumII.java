@@ -1,5 +1,7 @@
 package HashTable_day06;
 
+import java.util.HashMap;
+
 /**
  * 454. 4Sum II
  * Medium
@@ -41,6 +43,22 @@ public class FourSumII {
         System.out.println(fourSumCount(nums1, nums2, nums3, nums4));
     }
     public static int fourSumCount(int[] nums1, int[] nums2, int[] nums3, int[] nums4) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        int count = 0;
 
+        for (int i: nums1){
+            for (int j: nums2){
+                int sum = i + j;
+                map.put(sum, map.getOrDefault(sum,0) + 1);
+            }
+        }
+
+        for (int k: nums3){
+            for (int l: nums4){
+                int sum = k + l;
+                count += map.getOrDefault(-sum, 0);
+            }
+        }
+        return count;
     }
 }
