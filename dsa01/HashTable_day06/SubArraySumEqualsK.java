@@ -33,27 +33,25 @@ import java.util.HashMap;
 
 public class SubArraySumEqualsK {
     public static void main(String[] args) {
-        int[] nums = {1,2,1,2,1}; int k = 3;
-        subarraySum(nums, k);
-//        System.out.println(subarraySum(nums, k));
+        int[] nums = {1,2,1,2,1}; int k = 1;
+        System.out.println(subarraySum(nums, k));
     }
 
-    public static void subarraySum(int[] nums, int k) {
-        HashMap<Integer, Integer> prefixSum = new HashMap<>();
-        HashMap<Integer, Integer> frequency = new HashMap<>();
-        prefixSum.put(nums[0], 0 );
-        for (int i = 0; i < nums.length; i++) {
-            System.out.println("i: " + i);
-            for (int j = 0; j < nums.length; j++) {
-                int ps = prefixSum.getOrDefault(i-1, 0) + nums[i];
-                prefixSum.put(ps, i);
-//                System.out.print("j:" + j+ " ");
+    public static int subarraySum(int[] nums, int k) {
+        HashMap<Integer, Integer> prefixSumMap = new HashMap<>();
+        prefixSumMap.put(0, 1);
+        int count = 0;
+        int currentSum = 0;
+
+        for (int num: nums){
+            currentSum += num;
+
+            if(prefixSumMap.containsKey(currentSum-k)){
+                count+=prefixSumMap.getOrDefault(currentSum-k, 0);
             }
-            System.out.println(prefixSum);
-            System.out.println();
 
+            prefixSumMap.put(currentSum, prefixSumMap.getOrDefault(currentSum-k, 0) + 1);
         }
-
-//        return p.get(k);
+        return count;
     }
 }

@@ -1,5 +1,7 @@
 package HashTable_day06.homework;
 
+import java.util.HashMap;
+
 /**
  * 771. Jewels and Stones
  * Easy
@@ -31,11 +33,27 @@ package HashTable_day06.homework;
 
 public class JewelsAndStones {
     public static void main(String[] args) {
-       String jewels = "z", stones = "ZZ";
+//       String jewels = "z", stones = "ZZ";
+       String jewels = "aA", stones = "aAAbbbb";
         System.out.println(numJewelsInStones(jewels, stones));
     }
 
     public static int numJewelsInStones(String jewels, String stones) {
-        return 0;
+        int sum = 0;
+        HashMap<Character,Integer> hashmap = new HashMap();
+        for (int i = 0; i < jewels.length(); i++) {
+            for (int j = 0; j < stones.length(); j++) {
+                if (jewels.charAt(i) == stones.charAt(j)){
+                    hashmap.put(jewels.charAt(i), hashmap.getOrDefault(jewels.charAt(i), 0) + 1);
+                }
+            }
+        }
+
+
+        for(char jewel: hashmap.keySet()){
+            sum+=hashmap.get(jewel);
+        }
+
+        return sum;
     }
 }

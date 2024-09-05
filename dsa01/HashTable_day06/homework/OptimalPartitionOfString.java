@@ -1,5 +1,7 @@
 package HashTable_day06.homework;
 
+import java.util.ArrayList;
+
 /**
  * 2405. Optimal Partition of String
  * Medium
@@ -37,11 +39,33 @@ package HashTable_day06.homework;
 
 public class OptimalPartitionOfString {
     public static void main(String[] args) {
-        String s = "ssssss";
+        String s = "abacab";
+//         s = "ssssss";
+//         s = "abacbd";
+//         s = "gizfdfri";
         System.out.println(partitionString(s));
     }
 
     public static int partitionString(String s) {
-        return 0;
+        int count = 0;
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(s.charAt(0));
+
+        for (int i = 1; i < s.length(); i++) {
+            for (int j = 0; j < stringBuilder.length(); j++) {
+                if(s.charAt(i) == stringBuilder.charAt(j)){
+                    count++;
+                    stringBuilder.setLength(0);
+                    stringBuilder.append(s.charAt(i));
+                    break;
+                }
+            }
+                stringBuilder.append(s.charAt(i));
+        }
+
+        if (!stringBuilder.isEmpty()){
+            count++;
+        }
+        return count;
     }
 }

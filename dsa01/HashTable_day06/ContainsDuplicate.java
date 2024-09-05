@@ -28,8 +28,8 @@ import java.util.HashMap;
  *
  * Constraints:
  *
- * 1 <= nums.length <= 105
- * -109 <= nums[i] <= 109
+ * 1 <= nums.length <= 10^5
+ * -109 <= nums[i] <= 10^9
  */
 public class ContainsDuplicate {
     public static void main(String[] args) {

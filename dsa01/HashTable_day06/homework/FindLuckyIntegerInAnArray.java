@@ -1,5 +1,8 @@
 package HashTable_day06.homework;
 
+import java.util.Arrays;
+import java.util.HashMap;
+
 /**
  * 1394. Find Lucky Integer in an Array
  * Easy
@@ -37,11 +40,28 @@ package HashTable_day06.homework;
 
 public class FindLuckyIntegerInAnArray {
     public static void main(String[] args) {
-        int[] arr = {2,2,3,4};
+//        int[] arr = {2,2,3,4};
+//        int[] arr = {1,2,2,3,3,3};
+//        int[] arr = {2,2,3,4};
+        int[] arr = {2,2,2,3,3};
         System.out.println(findLucky(arr));
     }
 
     public static int findLucky(int[] arr) {
-        return 0;
+        Arrays.sort(arr);
+        int largest = -1;
+        HashMap<Integer, Integer> hashMap = new HashMap<>();
+
+        for (int num: arr){
+            hashMap.put(num, hashMap.getOrDefault(num, 0) + 1);
+        }
+
+        for (int key: hashMap.keySet()){
+            if(key == hashMap.get(key)){
+                largest = key;
+            }
+        }
+        System.out.println(hashMap);
+        return largest;
     }
 }
